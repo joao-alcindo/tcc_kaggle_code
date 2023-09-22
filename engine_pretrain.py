@@ -35,7 +35,7 @@ def train_one_epoch(model: torch.nn.Module,
     header = 'Epoch: [{}]'.format(epoch)
 
     # Set the frequency for printing training progress
-    print_freq = 10
+    print_freq = 40
 
     # Determine the number of accumulation iterations from the arguments
     accum_iter = args.accum_iter
