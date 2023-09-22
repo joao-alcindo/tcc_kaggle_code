@@ -15,7 +15,7 @@ class CustomDataset(Dataset):
     def __getitem__(self, idx):
         file_name = self.file_list[idx]
         file_path = os.path.join(self.data_path, file_name)
-        image = Image.open(file_path).convert("RGB")  # Carrega a imagem como RGB
+        image = Image.open(file_path).convert("L")  # Carrega a imagem em escala de cinza (1 canal)
         
         if self.transform:
             image = self.transform(image)
