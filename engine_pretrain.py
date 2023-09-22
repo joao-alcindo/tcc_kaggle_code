@@ -62,7 +62,10 @@ def train_one_epoch(model: torch.nn.Module,
             loss, _, _ = model(samples, mask_ratio=args.mask_ratio)
 
         # Get the loss value as a float
-        loss_value = loss.item()
+        if loss.numel() > 1:
+            loss_value = loss.mean().item()
+        else:
+            loss_value = loss.item()
 
         # Check if the loss is finite; exit training if it's not
         if not math.isfinite(loss_value):
