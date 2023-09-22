@@ -1,12 +1,13 @@
 import os
-import numpy as np
+from PIL import Image
+import torch
 from torch.utils.data import Dataset
 
 class CustomDataset(Dataset):
     def __init__(self, data_path, transform=None):
         self.data_path = data_path
         self.transform = transform
-        self.file_list = [file for file in os.listdir(data_path) if file.endswith('.npy')]
+        self.file_list = [file for file in os.listdir(data_path) if file.endswith('.png')]
 
     def __len__(self):
         return len(self.file_list)
@@ -14,9 +15,9 @@ class CustomDataset(Dataset):
     def __getitem__(self, idx):
         file_name = self.file_list[idx]
         file_path = os.path.join(self.data_path, file_name)
-        data = np.load(file_path)
+        image = Image.open(file_path).convert("RGB")  # Carrega a imagem como RGB
         
         if self.transform:
-            data = self.transform(data)
+            image = self.transform(image)
         
-        return data
+        return image
