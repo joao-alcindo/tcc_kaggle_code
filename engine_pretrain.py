@@ -59,7 +59,6 @@ def train_one_epoch(model: torch.nn.Module,
 
         # Use automatic mixed precision (AMP) for training
         with torch.cuda.amp.autocast():
-            samples = samples.to(device).float()
             loss, _, _ = model(samples, mask_ratio=args.mask_ratio)
 
         # Get the loss value as a float
