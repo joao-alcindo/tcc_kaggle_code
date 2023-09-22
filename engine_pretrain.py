@@ -63,7 +63,9 @@ def train_one_epoch(model: torch.nn.Module,
 
         # Get the loss value as a float
         if loss.numel() > 1:
-            loss_value = loss.mean().item()
+            loss = loss.mean()
+            loss_value = loss.item()
+            
         else:
             loss_value = loss.item()
 
